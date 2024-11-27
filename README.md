@@ -1,16 +1,37 @@
-# af_exam
+# Flutter Contacts Manager
 
-A new Flutter project.
+A simple **Contacts Manager App** built with **Flutter** and **GetX** state management. The app allows users to:  
+- Add, edit, and delete contacts.
+- Switch between light and dark themes (stored using `SharedPreferences`).
+- Save and manage contacts locally using `Sqflite`.
+- Backup and restore contacts to/from **Firebase** for added security.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- **Theme Management**: Toggle between light and dark themes, persisted across sessions.
+- **Contact Management**:
+  - Add new contacts with a name and number.
+  - Edit or delete existing contacts.
+- **Local Storage**: Contacts are stored in the local database using `Sqflite`.
+- **Firebase Backup**:
+  - Backup all contacts to Firebase Firestore.
+  - Restore contacts from Firebase anytime.
+  
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Screenshots
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+| Light Theme  | Dark Theme |
+| ------------- | ---------- |
+| ![Light](path_to_light_screenshot) | ![Dark](path_to_dark_screenshot) |
+
+---
+
+## Setup Instructions
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/IamSmitChitroda/af_exam.git
+   cd ad_exam
