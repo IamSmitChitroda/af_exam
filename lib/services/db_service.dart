@@ -1,4 +1,4 @@
-import 'package:path/path.dart';
+import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart';
 import '../model/contact_model.dart';
 
@@ -12,7 +12,7 @@ class DBService {
   }
 
   Future<Database> _initDB() async {
-    final path = join(await getDatabasesPath(), 'contacts.db');
+    final path = p.join(await getDatabasesPath(), 'contacts.db');
     return openDatabase(
       path,
       version: 1,

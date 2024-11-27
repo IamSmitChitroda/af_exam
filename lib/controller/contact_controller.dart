@@ -1,33 +1,46 @@
 import 'package:af_exam/model/contact_model.dart';
 import 'package:get/get.dart';
 import '../services/db_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ContactController extends GetxController {
+  RxBool isLoading = false.obs;
   RxList<Contact> contacts = <Contact>[].obs;
   final dbService = DBService();
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
-    loadContacts();
+    await loadContacts();
   }
 
-  void loadContacts() async {
+  Future<void> loadContacts() async {
     contacts.value = await dbService.getContacts();
   }
 
-  void addContact(Contact contact) async {
+  Future<void> addContact(Contact contact) async {
     await dbService.insertContact(contact);
     loadContacts();
   }
 
-  void updateContact(Contact contact) async {
+  Future<void> updateContact(Contact contact) async {
     await dbService.updateContact(contact);
     loadContacts();
   }
 
-  void deleteContact(int id) async {
+  Future<void> deleteContact(int id) async {
     await dbService.deleteContact(id);
     loadContacts();
+  }
+
+  Future<void> backupContact() async {
+    isLoading(true);
+    List ooo = contacts.map((element) => element.toMap()).toList();
+
+    for (int i = 0; i < ooo.length; i++) {
+      await firestore.collection('contacts').doc().set(ooo[i]);
+    }
+    isLoading(true);
   }
 }

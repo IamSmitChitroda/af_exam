@@ -24,36 +24,46 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
-      body: Obx(() {
-        if (contactController.contacts.isEmpty) {
-          return const Center(child: Text('No Contacts Found'));
-        }
-        return ListView.builder(
-          itemCount: contactController.contacts.length,
-          itemBuilder: (context, index) {
-            final contact = contactController.contacts[index];
-            return ListTile(
-              title: Text(contact.name),
-              subtitle: Text(contact.number),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () =>
-                        Get.to(() => AddEditContactView(contact: contact)),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.delete),
-                    onPressed: () =>
-                        contactController.deleteContact(contact.id!),
-                  ),
-                ],
+      body: Obx(
+        () {
+          if (contactController.contacts.isEmpty) {
+            return const Center(child: Text('No Contacts Found'));
+          }
+          return Stack(
+            children: [
+              ListView.builder(
+                itemCount: contactController.contacts.length,
+                itemBuilder: (context, index) {
+                  final contact = contactController.contacts[index];
+                  return ListTile(
+                    title: Text(contact.name),
+                    subtitle: Text(contact.number),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.edit),
+                          onPressed: () => Get.to(
+                              () => AddEditContactView(contact: contact)),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () =>
+                              contactController.deleteContact(contact.id!),
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        );
-      }),
+              if (contactController.isLoading.value)
+                const Center(
+                  child: CircularProgressIndicator(),
+                ),
+            ],
+          );
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.to(() => AddEditContactView()),
         child: const Icon(Icons.add),
