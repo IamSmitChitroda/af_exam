@@ -1,25 +1,23 @@
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+class Contact {
+  final int? id;
+  final String name;
+  final String number;
 
-class ContactModel {
-  RxString id;
-  RxString name;
-  RxString number;
+  Contact({this.id, required this.name, required this.number});
 
-  ContactModel({
-    required this.id,
-    required this.name,
-    required this.number,
-  });
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'number': number,
+    };
+  }
 
-  factory ContactModel.fromJson(Map<String, dynamic> json) => ContactModel(
-        id: json["id"].toString().obs,
-        name: json["name"].toString().obs,
-        number: json["number"].toString().obs,
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id.value,
-        "name": name.value,
-        "number": number.value,
-      };
+  factory Contact.fromMap(Map<String, dynamic> map) {
+    return Contact(
+      id: map['id'],
+      name: map['name'],
+      number: map['number'],
+    );
+  }
 }
