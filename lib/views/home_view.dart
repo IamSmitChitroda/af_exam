@@ -16,11 +16,23 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Contacts'),
         actions: [
+          Obx(
+            () {
+              return IconButton(
+                icon: Icon(
+                  themeController.isDarkMode.value
+                      ? Icons.light_mode
+                      : Icons.dark_mode,
+                ),
+                onPressed: themeController.toggleTheme,
+              );
+            },
+          ),
           IconButton(
-            icon: Icon(themeController.isDarkMode.value
-                ? Icons.light_mode
-                : Icons.dark_mode),
-            onPressed: themeController.toggleTheme,
+            icon: const Icon(Icons.backup),
+            onPressed: () {
+              contactController.backupContact();
+            },
           ),
         ],
       ),
