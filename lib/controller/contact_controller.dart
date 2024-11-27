@@ -1,9 +1,11 @@
 import 'package:af_exam/model/contact_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../services/db_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ContactController extends GetxController {
+  GlobalKey<FormState> key = GlobalKey<FormState>();
   RxBool isLoading = false.obs;
   RxList<Contact> contacts = <Contact>[].obs;
   final dbService = DBService();
